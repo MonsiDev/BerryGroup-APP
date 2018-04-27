@@ -1,0 +1,49 @@
+<div id="index-delivery-frame" class="frame">
+  [temp src="import/delivery-header.html" ]
+  [temp src="import/delivery-preloader.html" ]
+  <form onsubmit="return Basket.sendDelivery(this)">
+    <div class="basket-delivery-contact">
+      <div class="basket-delivery-contact__title">Как с вами связаться?</div>
+        <input type="text" name="phone" class="basket-delivery-contact__input" placeholder="Телефон" pattern="((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}" required>
+        <input type="text" name="name" class="basket-delivery-contact__input" placeholder="Имя *" required>
+    </div>
+    <div class="basket-delivery-option">
+      <div class="basket-delivery-option__title">Доставка</div>
+      <div class="basket-delivery-option__description">При стоимости заказа от 1000 рублей - доставка курьером бесплатно.</div>
+      <div class="basket-delivery-radio">
+        <label>
+          <input type="radio" name="delivery"  onchange="Basket.delivery=true;Basket.basketRefresh()" checked>
+          <span class="basket-delivery-radio__box"></span>
+          <span class="basket-delivery-radio__title">Доставка курьером (100 руб)</span>
+        </label>
+      </div>
+      <div class="basket-delivery-radio">
+        <label>
+          <input type="radio" name="delivery" onchange="Basket.delivery=false;Basket.basketRefresh()">
+          <span class="basket-delivery-radio__box"></span>
+          <span class="basket-delivery-radio__title">Самовывоз (Бесплатно)</span>
+        </label>
+      </div>
+      <input type="text" name="address" class="basket-delivery-option__address" placeholder="Адрес доставки *" required>
+    </div>
+    <div class="basket-total">
+      <div class="basket-total__title" id="basket-total-price">
+        <span>Сумма</span>
+        <span>1680</span>
+      </div>
+      <div class="basket-total__title" id="basket-info-delivery">
+        <span>Доставка</span>
+        <span>бесплатно</span>
+      </div>
+    </div>
+    <div class="basket-delivery">
+      <div class="basket-delivery__total" id="basket-total-price">
+        <span>Итого:</span>
+        <span>1680 руб.</span>
+      </div>
+      <button class="basket-delivery__button">
+        ЗАКАЗАТЬ
+      </button>
+    </div>
+  </form>
+</div>

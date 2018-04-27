@@ -1,0 +1,36 @@
+<div id="index-foods-frame" class="frame">
+  [temp src="import/foods-header.html" ]
+  <div id="index-foods-list">
+    <div class="foods-item" id="good-1" style="background-image: url('http://dietdo.ru/wp-content/uploads/2017/02/salat-avokado-krevetki-2.jpg');">
+      <div class="foods-item__info">
+        <div class="foods-item__title">Авокадо с креветками</div>
+        <div class="foods-item__description">Авокадо, тигровые креветки, лимон, помидоры, масло оливковое</div>
+      </div>
+      <div class="foods-item__panel">
+        <div class="foods-item__price">420 руб.</div>
+        <div class="foods-item__weight">200 г.</div>
+        <div class="foods-item__button">
+          <button class="foods-item__button-delivery" id="good-delivery-button" onclick="Basket.addGoods('peska', 'Авокадо', '200 г.', '420', 'good-1')">
+            <svg width="15px" height="15px" stroke="#fff">
+              <use xlink:href="img/icons-pack.svg#svg-item-cart-icon"></use>
+            </svg>
+            <span>Заказать</span>
+          </button>
+          <div class="foods-item__button-calc foods-item__button-calc--hidden" id="good-delivery-calc">
+            <div class="foods-item__button-ct" id="good-calc-count">2 шт</div>
+            <button class="foods-item__button-pm" onclick="Basket.subGoods('peska', 'good-1')">
+              <svg width="14px" height="14px">
+                <use xlink:href="img/icons-pack.svg#svg-minus-icon"></use>
+              </svg>
+            </button>
+            <button class="foods-item__button-pm" onclick="Basket.addGoods('peska', 'Авокадо', '200 г.', '420 руб.', 'good-1')">
+              <svg width="14px" height="14px">
+                <use xlink:href="img/icons-pack.svg#svg-plus-icon"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

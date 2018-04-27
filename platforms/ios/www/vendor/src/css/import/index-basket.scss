@@ -1,0 +1,258 @@
+.basket-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 112px;
+  background-color: #f4f4f4;
+}
+
+.basket-logo svg {
+  width: 57.971%;
+}
+
+.basket-goods {
+  padding: 0;
+  margin-top: -15px;
+}
+
+.basket-good {
+  display: flex;
+  margin-top: 15px;
+  padding: 15px;
+  border-top: 1px solid #f4f4f4;
+}
+
+.basket-good:first-child {
+  border-top: none;
+}
+
+.basket-good__info {
+  width: 100%;
+  margin-left: 20px;
+}
+
+.basket-good__img {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-width: 100px;
+  height: 100px;
+}
+
+.basket-good__title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+}
+
+%basket-good__txt {
+  display: flex;
+  justify-content: space-between;
+  color: #454442;
+  font-size: 16px;
+  font-weight: 300;
+  width: 100%;
+  line-height: 8px;
+  border-bottom: 2px dotted #454442;
+}
+
+%basket-good__txt span {
+  position: relative;
+}
+
+%basket-good__txt span::before {
+  position: absolute;
+  content: "";
+  height: 130%;
+  width: 86%;
+  line-height: 130%;
+  background-color: #fff;
+  z-index: 1;
+  padding: 0 7px;
+}
+
+%basket-good__txt span::after {
+  position: relative;
+  z-index: 2;
+  content: attr(data-text);
+}
+
+.basket-good__price {
+  margin-top: 10px;
+  @extend %basket-good__txt;
+}
+
+.basket-good__count {
+  margin-top: 15px;
+  @extend %basket-good__txt;
+}
+
+.basket-good__weight {
+  font-size: 14px;
+  color: #b3b3b3;
+  font-weight: 300;
+}
+
+.basket-total {
+  border-top: 1px solid #f4f4f4;
+  border-bottom: 1px solid #f4f4f4;
+  padding: 15px;
+  margin-bottom: 122px;
+  margin-top: 15px;
+}
+
+.basket-total__title:last-child {
+  margin-top: 10px;
+}
+
+.basket-total__title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 300;
+  color: #b3b3b3;
+}
+
+.basket-delivery {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 2;
+}
+
+%basket-delivery {
+  height: 56px;
+}
+
+.basket-delivery__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: #f4f4f4;
+  padding: 0 15px;
+  @extend %basket-delivery;
+}
+
+.basket-delivery__button {
+  display: block;
+  border: none;
+  width: 100%;
+  background-color: #00a650;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 300;
+  outline: none;
+  text-align: center;
+  line-height: 56px;
+  @extend %basket-delivery;
+}
+
+%basket-delivery-ct {
+  padding: 15px 15px 0 15px;
+}
+
+.basket-delivery-radio {
+  position: relative;
+  margin-top: 15px;
+}
+
+.basket-delivery-radio:last-child {
+  margin-top: 0;
+}
+
+.basket-delivery-radio label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 300;
+  color: #454442;
+}
+
+.basket-delivery-radio__title {
+  margin-left: 15px;
+}
+
+.basket-delivery-radio input {
+  display: none;
+}
+
+.basket-delivery-radio__box {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #000000;
+  border-radius: 50%;
+}
+
+.basket-delivery-radio__box::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: background-color 0.23s;
+}
+
+.basket-delivery-radio input:checked + .basket-delivery-radio__box::before {
+  background-color: #000;
+}
+
+.basket-delivery-contact {
+  @extend %basket-delivery-ct;
+}
+
+.basket-delivery-option__title,
+.basket-delivery-contact__title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.basket-delivery-option__address,
+.basket-delivery-contact__input {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  border: 1px solid #b3b3b3;
+  color: #454442;
+  transition: border-color 0.23s;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 15px 20px;
+  transition: border-color 0.23s;
+}
+
+.basket-delivery-option__address:focus:invalid,
+.basket-delivery-contact__input:focus:invalid {
+  border-color: #f00;
+}
+
+.basket-delivery-option__address::placeholder,
+.basket-delivery-contact__input::placeholder {
+  color: #b3b3b3;
+}
+
+.basket-delivery-option__address:focus,
+.basket-delivery-contact__input:focus {
+  border-color: #454442;
+}
+
+.basket-delivery-option {
+  @extend %basket-delivery-ct;
+}
+
+.basket-delivery-option__description {
+  font-weight: 300;
+  font-size: 16px;
+  color: #b3b3b3;
+  margin-top: 5px;
+}
