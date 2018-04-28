@@ -1930,7 +1930,7 @@ var View = {
         var html = "<div class=\"foods-item\" id=\"good-" + _each['good_id'] + "\" style=\"background-image: url('" + View.restUrl + _each['path'] + "');\">" +
         "<div class=\"foods-item__info\">" +
         "<div class=\"foods-item__title\">" + _each['name'] + "</div>" +
-        "<div class=\"foods-item__description\">" + _each['description'] + "</div>" +
+        "<div class=\"foods-item__description\">" + _each['meta_description'] + "</div>" +
         "</div>" +
         "<div class=\"foods-item__panel\">" +
         "<div class=\"foods-item__price\">" + _each['price'] + " руб.</div>" +
