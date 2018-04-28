@@ -1674,7 +1674,7 @@ var Basket = {
         }
       }
       formSend["totalCount"] = Basket.totalCount;
-      formSend["totalPirce"] = Basket.totalPrice;
+      formSend["totalPrice"] = Basket.totalPrice;
       formSend["goods"] = Basket.goods;
       WSocket.send("delivery=" + JSON.stringify(formSend));
       WSocket.onmessage = function(_e) {
@@ -1986,7 +1986,7 @@ var View = {
   }
 };
 
-var WSocket = new WebSocket("ws://127.0.0.1:2346");
+var WSocket = new WebSocket("ws://82.146.54.90:2346");//82.146.54.90
 
 WSocket.onopen = function() {};
 
