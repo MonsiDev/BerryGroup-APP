@@ -5,7 +5,7 @@
   <meta name="format-detection" content="telephone=no" />
   <meta name="msapplication-tap-highlight" content="no" />
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
+  <!--meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" /-->
   <link rel="stylesheet" type="text/css" href="build/css/reset.css" />
   <link rel="stylesheet" type="text/css" href="build/css/fonts.css" />
   <link rel="stylesheet" type="text/css" href="build/css/jquery.mobile.css" />
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="index-nav__list">
-      <button class="index-nav__item">
+      <button class="index-nav__item" onclick="Basket.goBasket(this)">
         <svg width="16px" height="15px">
           <use xlink:href="img/icons-pack.svg#svg-item-cart-icon"></use>
         </svg>
@@ -40,13 +40,13 @@
         </svg>
         <span>Заведения</span>
       </button>
-      <button class="index-nav__item">
+      <button class="index-nav__item" onclick="window.location.href='http://xn--80aaasqiegq2eub9c.xn--p1ai/'">
         <svg width="15px" height="11px">
           <use xlink:href="img/icons-pack.svg#svg-item-card-icon"></use>
         </svg>
         <span>Накопительные карты</span>
       </button>
-      <button class="index-nav__item index-nav__item--border-top">
+      <button class="index-nav__item index-nav__item--border-top" onclick="window.location.href='tel:89287207200'">
         <svg width="15px" height="15px">
           <use xlink:href="img/icons-pack.svg#svg-item-phone-icon"></use>
         </svg>
@@ -80,12 +80,19 @@
   </button>
 </div>
 
-  <div class="index-slider">
-  
+  <div class="index-slider" id="index-slider">
+  <div class="index-slider__item">
+    <img src="img/card.png" alt="" class="index-slider__item-image">
+    <div class="index-slider__item-text">Дисконтные карты </div>
+  </div>
+  <div class="index-slider__item">
+    <img src="img/card-2.png" alt="" class="index-slider__item-image">
+    <div class="index-slider__item-text">Дисконтные карты </div>
+  </div>
 </div>
 
   <div class="restaurant">
-  <div class="restaurant-card" style="background-image: url('img/restaurant/spletni.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/spletni.png)', 'img/logo/spletni-logo.png', 'Кафе Сплетни', 'spletni', 'https://xn--80ajjbkbdnbpvp4e9c.xn--p1ai'))">
+  <div class="restaurant-card" style="background-image: url('img/restaurant/spletni.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/spletni.png)', 'img/logo/spletni-logo.png', 'Кафе Сплетни', 'spletni', 'http://xn--80ajjbkbdnbpvp4e9c.xn--p1ai'))">
   <div class="restaurant-card__logo">
     <img src="img/logo/spletni-logo.png" class="restaurant-card__image">
   </div>
@@ -95,7 +102,7 @@
   </div>
 </div>
 
-  <div class="restaurant-card" style="background-image: url('img/restaurant/rediska.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/rediska.png)', 'img/logo/rediska-logo.png', 'Буфет Редиска', 'rediska', 'https://xn--80aakdqcldhs1ap7f5c.xn--p1ai'))">
+  <div class="restaurant-card" style="background-image: url('img/restaurant/rediska.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/rediska.png)', 'img/logo/rediska-logo.png', 'Буфет Редиска', 'rediska', 'http://xn--80aakdqcldhs1ap7f5c.xn--p1ai'))">
   <div class="restaurant-card__logo">
     <img src="img/logo/rediska-logo.png" class="restaurant-card__image">
   </div>
@@ -105,7 +112,7 @@
   </div>
 </div>
 
-  <div class="restaurant-card" style="background-image: url('img/restaurant/blackberry.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/blackberry.png)', 'img/logo/blackberry-logo.png', 'BlackBerry', 'blackberry', 'https://xn--80abaqpbjfcfu8aa6h6cg.xn--p1ai'))">
+  <div class="restaurant-card" style="background-image: url('img/restaurant/blackberry.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/blackberry.png)', 'img/logo/blackberry-logo.png', 'BlackBerry', 'blackberry', 'http://xn--80abaqpbjfcfu8aa6h6cg.xn--p1ai'))">
   <div class="restaurant-card__logo">
     <img src="img/logo/blackberry-logo.png" class="restaurant-card__image">
   </div>
@@ -115,7 +122,7 @@
   </div>
 </div>
 
-  <div class="restaurant-card" style="background-image: url('img/restaurant/redberry.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/redberry.png)', 'img/logo/redberry-logo.png', 'RedBerry', 'redberry', 'https://xn--80abidcsbqhs1aea6h6c.xn--p1ai'))">
+  <div class="restaurant-card" style="background-image: url('img/restaurant/redberry.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/redberry.png)', 'img/logo/redberry-logo.png', 'RedBerry', 'redberry', 'http://xn--80abidcsbqhs1aea6h6c.xn--p1ai'))">
   <div class="restaurant-card__logo">
     <img src="img/logo/redberry-logo.png" class="restaurant-card__image">
   </div>
@@ -125,7 +132,7 @@
   </div>
 </div>
 
-  <div class="restaurant-card" style="background-image: url('img/restaurant/Broadway.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/Broadway.png)', 'img/logo/Broadway-logo.png', 'BroadWay', 'Broadway', 'https://xn--80abdhgtfkhsgx3h3c.xn--p1ai'))">
+  <div class="restaurant-card" style="background-image: url('img/restaurant/Broadway.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/Broadway.png)', 'img/logo/Broadway-logo.png', 'BroadWay', 'Broadway', 'http://xn--80abdhgtfkhsgx3h3c.xn--p1ai'))">
   <div class="restaurant-card__logo">
     <img src="img/logo/Broadway-logo.png" class="restaurant-card__image">
   </div>
@@ -135,7 +142,7 @@
   </div>
 </div>
 
-  <div class="restaurant-card" style="background-image: url('img/restaurant/fastberry.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/fastberry.png)', 'img/logo/fastberry-logo.png', 'Fast Berry', 'fastberry', 'https://xn--80aacqpbogq2aainz0d8d.xn--p1ai'))">
+  <div class="restaurant-card" style="background-image: url('img/restaurant/fastberry.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/fastberry.png)', 'img/logo/fastberry-logo.png', 'Fast Berry', 'fastberry', 'http://xn--80aacqpbogq2aainz0d8d.xn--p1ai'))">
   <div class="restaurant-card__logo">
     <img src="img/logo/fastberry-logo.png" class="restaurant-card__image">
   </div>
@@ -145,7 +152,7 @@
   </div>
 </div>
 
-  <div class="restaurant-card" style="background-image: url('img/restaurant/minutka.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/minutka.png)', 'img/logo/minutka-logo.png', 'Бистро Минутка', 'minutka', 'https://xn--80aawchdfdkc6cl2dvd.xn--p1ai'))">
+  <div class="restaurant-card" style="background-image: url('img/restaurant/minutka.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/minutka.png)', 'img/logo/minutka-logo.png', 'Бистро Минутка', 'minutka', 'http://xn--80aawchdfdkc6cl2dvd.xn--p1ai'))">
   <div class="restaurant-card__logo">
     <img src="img/logo/minutka-logo.png" class="restaurant-card__image">
   </div>
@@ -155,7 +162,7 @@
   </div>
 </div>
 
-  <div class="restaurant-card" style="background-image: url('img/restaurant/tirex.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/tirex.png)', 'img/logo/tirex-logo.png', 'Кафе Тирекс', 'tirex', 'https://xn--80apbgcemwkg6d1ch.xn--p1ai'))">
+  <div class="restaurant-card" style="background-image: url('img/restaurant/tirex.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/tirex.png)', 'img/logo/tirex-logo.png', 'Кафе Тирекс', 'tirex', 'http://xn--80apbgcemwkg6d1ch.xn--p1ai'))">
   <div class="restaurant-card__logo">
     <img src="img/logo/tirex-logo.png" class="restaurant-card__image">
   </div>

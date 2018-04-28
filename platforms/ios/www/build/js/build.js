@@ -1661,8 +1661,6 @@ var Basket = {
   sendDelivery: function($this) {
     if (Basket.totalPrice > 0 && Basket.totalCount > 0) {
       var $preloader = document.getElementById("delivery-preloader");
-      $preloader.style.display = "flex";
-      $preloader.classList.add("preloader--show");
       var _e = event || window.event;
       var i = 0;
       var formSend = {};
@@ -1670,9 +1668,20 @@ var Basket = {
         if (_e.target[i].name == "delivery") {
           formSend[_e.target[i].name] = Basket.delivery;
         } else {
+          if(_e.target[i].name == "phone") {
+            if(!/((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}/.exec(_e.target[i].value)) {
+              _e.target[i].classList.add('error');
+              alert('Введите корректный телефон');
+              return false;
+            } else {
+              _e.target[i].classList.remove('error');
+            }
+          }
           formSend[_e.target[i].name] = _e.target[i].value;
         }
       }
+      $preloader.style.display = "flex";
+      $preloader.classList.add("preloader--show");
       formSend["totalCount"] = Basket.totalCount;
       formSend["totalPrice"] = Basket.totalPrice;
       formSend["goods"] = Basket.goods;
@@ -1686,6 +1695,9 @@ var Basket = {
         Basket.basketRefresh();
         animate(2000, function() {
           $preloader.style.display = "";
+          Frames.backFrame();
+          Frames.backFrame();
+          alert("Заказ успешно оформлен, мы перезвоним вам в течение 5 минут для подтверждения заказа");
         });
       };
     }
@@ -1712,7 +1724,7 @@ var Basket = {
       bgc.classList.add("basket-good__count");
       bgp.classList.add("basket-good__price");
 
-      bg.style.backgroundImage = "url(" + View.restUrl + _each["path"] + ")";
+      bgi.style.backgroundImage = "url(" + View.restUrl + _each["path"] + ")";
       bgt.innerHTML = _each["title"];
       bgw.innerHTML = "200 г";
       bgc.innerHTML =
@@ -1878,6 +1890,7 @@ var View = {
   restUrl : "",
 
   init: function() {
+    $('#index-slider').bxSlider();
     var starsList = document.querySelectorAll("#index-category-stars>svg");
     starsList.forEach(function(_each) {
       _each.addEventListener("click", function(_e) {
