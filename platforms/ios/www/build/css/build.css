@@ -257,7 +257,11 @@ ul.bxslider {
 .index-nav__header {
   display: flex;
   align-items: center;
+  text-align: left;
   padding: 31px 15px;
+  width: 100%;
+  border: none;
+  outline: none;
   background-image: linear-gradient(to bottom, #DB5501, #FE8700); }
 
 .index-nav__header-info {
@@ -436,6 +440,31 @@ ul.bxslider {
 
 .category-info__stars svg.category-info__stars--active {
   fill: #FD8600; }
+
+.category-info-w {
+  position: fixed;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  transition: right 0.23s;
+  z-index: 5; }
+
+.category-info-w--show {
+  right: 0; }
+
+.category-info-w__item {
+  padding: 15px; }
+
+.category-info-w__title {
+  font-size: 14px;
+  color: #808080; }
+
+.category-info-w__desc {
+  font-weight: 300;
+  font-size: 16px;
+  color: #454442;
+  margin-top: 5px; }
 
 .foods-header {
   display: flex;

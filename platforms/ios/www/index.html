@@ -18,45 +18,39 @@
   <div id="index-main-frame" class="frame frame--show">
   <div class="index-nav" id="index-nav">
   <div class="index-nav__menu">
-    <div class="index-nav__header">
-      <svg width="50px" height="50px">
-        <use xlink:href="img/icons-pack.svg#svg-user-icon"></use>
+    <button class="index-nav__header">
+      <svg width="50px" height="50px" style="margin-top:-10px">
+        <use xlink:href="img/icons-pack.svg#svg-food"></use>
       </svg>
       <div class="index-nav__header-info">
-        <div class="index-nav__header-info-title">Войдите</div>
-        <div class="index-nav__header-info-description">или зарегестрируйтесь</div>
+        <div class="index-nav__header-info-title">Забронировать</div>
+        <div class="index-nav__header-info-description">столик</div>
       </div>
-    </div>
+    </button>
     <div class="index-nav__list">
-      <button class="index-nav__item" onclick="Basket.goBasket(this)">
+      <button class="index-nav__item" onclick="Basket.goBasket(this);navClose()">
         <svg width="16px" height="15px">
           <use xlink:href="img/icons-pack.svg#svg-item-cart-icon"></use>
         </svg>
         <span>Корзина</span>
       </button>
-      <button class="index-nav__item">
+      <button class="index-nav__item" onclick="Frames.goFrame('index-main-frame', this, navClose());">
         <svg width="17px" height="17px">
           <use xlink:href="img/icons-pack.svg#svg-item-food-icon"></use>
         </svg>
         <span>Заведения</span>
       </button>
-      <button class="index-nav__item" onclick="window.location.href='http://xn--80aaasqiegq2eub9c.xn--p1ai/'">
+      <button class="index-nav__item" onclick="window.open('http://xn--80ajjbkbdnbpvp4e9c.xn--p1ai/card');navClose()">
         <svg width="15px" height="11px">
           <use xlink:href="img/icons-pack.svg#svg-item-card-icon"></use>
         </svg>
         <span>Накопительные карты</span>
       </button>
-      <button class="index-nav__item index-nav__item--border-top" onclick="window.location.href='tel:89287207200'">
+      <button class="index-nav__item index-nav__item--border-top" onclick="window.open('tel:89287207200');navClose()">
         <svg width="15px" height="15px">
           <use xlink:href="img/icons-pack.svg#svg-item-phone-icon"></use>
         </svg>
         <span>Позвонить нам</span>
-      </button>
-      <button class="index-nav__item">
-        <svg width="16px" height="16px">
-          <use xlink:href="img/icons-pack.svg#svg-item-cog-icon"></use>
-        </svg>
-        <span>Настройки</span>
       </button>
     </div>
   </div>
@@ -78,17 +72,6 @@
       <use xlink:href="img/icons-pack.svg#svg-cart-icon"></use>
     </svg>
   </button>
-</div>
-
-  <div class="index-slider" id="index-slider">
-  <div class="index-slider__item">
-    <img src="img/card.png" alt="" class="index-slider__item-image">
-    <div class="index-slider__item-text">Дисконтные карты </div>
-  </div>
-  <div class="index-slider__item">
-    <img src="img/card-2.png" alt="" class="index-slider__item-image">
-    <div class="index-slider__item-text">Дисконтные карты </div>
-  </div>
 </div>
 
   <div class="restaurant">
@@ -177,6 +160,29 @@
 </div>
 
   <div id="index-category-frame" class="frame">
+  <div class="category-info-w" id="category-info-w">
+  <div class="foods-header">
+    <button class="foods-header__button" onclick="eventInfo()">
+      <svg width="12px" height="12px">
+        <use xlink:href="img/icons-pack.svg#svg-close"></use>
+      </svg>
+    </button>
+    <div class="foods-header__title" id="basket-header-title">Информация</div>
+  </div>
+  <div class="category-info-w__item">
+    <div class="category-info-w__title">Телефон</div>
+    <div class="category-info-w__desc" id="category-info-w-phone">+7 (928) 720-720-0</div>
+  </div>
+  <div class="category-info-w__item">
+    <div class="category-info-w__title">Время</div>
+    <div class="category-info-w__desc" id="category-info-w-time">11.00 - 00.00</div>
+  </div>
+  <div class="category-info-w__item">
+    <div class="category-info-w__title">Адрес</div>
+    <div class="category-info-w__desc"  id="category-info-w-address">г. Нальчик, ул. Кешокова, 77</div>
+  </div>
+</div>
+
   <div class="category-head" id="index-category-head">
     <div class="category-header">
       <button class="category-header__button" onclick="Frames.backFrame(event)">
@@ -184,7 +190,7 @@
           <use xlink:href="img/icons-pack.svg#svg-arrow-left"></use>
         </svg>
       </button>
-      <button class="category-header__button">
+      <button class="category-header__button" onclick="eventInfo()">
         <svg width="20px" height="20px">
           <use xlink:href="img/icons-pack.svg#svg-info"></use>
         </svg>

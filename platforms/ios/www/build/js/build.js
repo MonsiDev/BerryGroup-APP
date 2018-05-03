@@ -1809,6 +1809,13 @@ var Frames = {
 (function() {
   "use strict";
 
+  window["eventInfo"] = function() {
+    var ciw = document.getElementById("category-info-w");
+    ciw.classList.contains("category-info-w--show")
+      ? ciw.classList.remove("category-info-w--show")
+      : ciw.classList.add("category-info-w--show");
+  };
+
   window["appInit"] = function() {
     navInit("nav-button-show");
     View.init();
@@ -1828,7 +1835,7 @@ var Frames = {
     );
   };
 
-  window['animate'] = function(duration, endAnimation) {
+  window["animate"] = function(duration, endAnimation) {
     var startTime = performance.now();
     requestAnimationFrame(function measure(time) {
       var timePassed = time - startTime;
@@ -1839,6 +1846,13 @@ var Frames = {
       if (timePassed < duration) {
         requestAnimationFrame(measure);
       }
+    });
+  };
+
+  window['navClose'] = function() {
+    idNav.classList.remove("index-nav--show");
+    animate(230, function() {
+      idNav.style.visibility = "";
     });
   }
 
@@ -1853,12 +1867,10 @@ var Frames = {
 
     idNav.addEventListener("click", function(_e) {
       if (_e.target == this) {
-        this.classList.remove("index-nav--show");
-        animate(230, function() {
-          idNav.style.visibility = "";
-        });
+        navClose();
       }
     });
+    window['idNav'] = idNav;
   }
 })();
 
@@ -1880,7 +1892,7 @@ var Net = {
     WSocket.onmessage = function(_e) {
       _func(parseInt(_e.data));
     }
-  }
+  },
 };
 
 var View = {
@@ -1912,6 +1924,10 @@ var View = {
       document.getElementById("index-category-head").style.backgroundImage = bg;
       document.getElementById("index-category-logo").src = logo;
       document.getElementById("index-category-title").innerHTML = title;
+
+      document.getElementById('category-info-w-phone').innerHTML = json['phone'];
+      document.getElementById('category-info-w-time').innerHTML = json['time'];
+      document.getElementById('category-info-w-address').innerHTML = json['address'];
 
       json["data"].forEach(function(_each) {
         var item = document.createElement("BUTTON");
