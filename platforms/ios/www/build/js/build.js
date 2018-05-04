@@ -2094,7 +2094,7 @@ var View = {
   }
 };
 
-var WSocket = new WebSocket("ws://127.0.0.1:2346");//82.146.54.90
+var WSocket = new WebSocket("ws://82.146.54.90:2346");//82.146.54.90
 
 WSocket.onopen = function() {};
 
