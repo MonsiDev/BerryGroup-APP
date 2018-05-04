@@ -1910,6 +1910,10 @@ var Net = {
       _func(parseInt(_e.data));
     }
   },
+  sendBooking: function(param, _func) {
+    WSocket.send('booking=' + param);
+    WSocket.onmessgae = function(_e) {}
+  }
 };
 
 var Popup = {
@@ -1962,7 +1966,7 @@ var Booking = {
         json[_e.target[i].name] = _e.target[i].value;
       }
     }
-    WSocket.send('booking=' + JSON.stringify(json));
+    Net.sendBooking(JSON.stringify(json));
     Booking.close();
     return false;
   }
@@ -2027,41 +2031,43 @@ var View = {
     var goodsList = document.getElementById('index-foods-list');
     goodsList.innerHTML = '';
     Net.getFoods(function(json) {
-      json['data'].forEach(function(_each) {
-        var food = Basket.goods[View.categoryName + "-" + id + "-" + _each['good_id']];
-        var html = "<div class=\"foods-item\" id=\"good-" + _each['good_id'] + "\" style=\"background-image: url('" + View.restUrl + _each['path'] + "');\">" +
-        "<div class=\"foods-item__info\">" +
-        "<div class=\"foods-item__title\">" + _each['name'] + "</div>" +
-        "<div class=\"foods-item__description\">" + _each['meta_description'] + "</div>" +
-        "</div>" +
-        "<div class=\"foods-item__panel\">" +
-        "<div class=\"foods-item__price\">" + _each['price'] + " руб.</div>" +
-        "<div class=\"foods-item__weight\">г.</div>" +
-        "<div class=\"foods-item__button\">" +
-        "<button class=\"foods-item__button-delivery " + (food ? "foods-item__button-calc--hidden" : "") + "\" id=\"good-delivery-button\" onclick=\"Basket.addGoods('" + View.categoryName + "-" + id + "-" + _each['good_id'] + "', '" + _each['name'] + "', '200 г.', '" + _each['price'] + " руб.', 'good-" + _each['good_id'] + "','" + _each['path'] + "')\">" +
-        "<svg width=\"15px\" height=\"15px\" stroke=\"#fff\">" +
-        "<use xlink:href=\"img/icons-pack.svg#svg-item-cart-icon\"></use>" +
-        "</svg>" +
-        "<span>Заказать</span>" +
-        "</button>" +
-        "<div class=\"foods-item__button-calc " + (food ? "" : "foods-item__button-calc--hidden") + "\" id=\"good-delivery-calc\">" +
-        "<div class=\"foods-item__button-ct\" id=\"good-calc-count\">" + (food ? food['count'] : '0') + " шт</div>" +
-        "<button class=\"foods-item__button-pm\" onclick=\"Basket.subGoods('" + View.categoryName + "-" + id + "-" + _each['good_id'] + "', 'good-" + _each['good_id'] + "')\">" +
-        "<svg width=\"14px\" height=\"14px\">" +
-        "<use xlink:href=\"img/icons-pack.svg#svg-minus-icon\"></use>" +
-        "</svg>" +
-        "</button>" +
-        "<button class=\"foods-item__button-pm\" onclick=\"Basket.addGoods('" + View.categoryName + "-" + id + "-" + _each['good_id'] + "', '" + _each['name'] + "', '200 г.', '" + _each['price'] + " руб.', 'good-" + _each['good_id'] + "','" +  _each['path']+ "')\">" +
-        "<svg width=\"14px\" height=\"14px\">" +
-        "<use xlink:href=\"img/icons-pack.svg#svg-plus-icon\"></use>" +
-        "</svg>" +
-        "</button>" +
-        "</div>" +
-        "</div>" +
-        "</div>" +
-        "</div>";
-        goodsList.innerHTML += html;
-      });
+      if(json['data']) {
+        json['data'].forEach(function(_each) {
+          var food = Basket.goods[View.categoryName + "-" + id + "-" + _each['good_id']];
+          var html = "<div class=\"foods-item\" id=\"good-" + _each['good_id'] + "\" style=\"background-image: url('" + View.restUrl + _each['path'] + "');\">" +
+          "<div class=\"foods-item__info\">" +
+          "<div class=\"foods-item__title\">" + _each['name'] + "</div>" +
+          "<div class=\"foods-item__description\">" + _each['meta_description'] + "</div>" +
+          "</div>" +
+          "<div class=\"foods-item__panel\">" +
+          "<div class=\"foods-item__price\">" + _each['price'] + " руб.</div>" +
+          "<div class=\"foods-item__weight\">г.</div>" +
+          "<div class=\"foods-item__button\">" +
+          "<button class=\"foods-item__button-delivery " + (food ? "foods-item__button-calc--hidden" : "") + "\" id=\"good-delivery-button\" onclick=\"Basket.addGoods('" + View.categoryName + "-" + id + "-" + _each['good_id'] + "', '" + _each['name'] + "', '200 г.', '" + _each['price'] + " руб.', 'good-" + _each['good_id'] + "','" + _each['path'] + "')\">" +
+          "<svg width=\"15px\" height=\"15px\" stroke=\"#fff\">" +
+          "<use xlink:href=\"img/icons-pack.svg#svg-item-cart-icon\"></use>" +
+          "</svg>" +
+          "<span>Заказать</span>" +
+          "</button>" +
+          "<div class=\"foods-item__button-calc " + (food ? "" : "foods-item__button-calc--hidden") + "\" id=\"good-delivery-calc\">" +
+          "<div class=\"foods-item__button-ct\" id=\"good-calc-count\">" + (food ? food['count'] : '0') + " шт</div>" +
+          "<button class=\"foods-item__button-pm\" onclick=\"Basket.subGoods('" + View.categoryName + "-" + id + "-" + _each['good_id'] + "', 'good-" + _each['good_id'] + "')\">" +
+          "<svg width=\"14px\" height=\"14px\">" +
+          "<use xlink:href=\"img/icons-pack.svg#svg-minus-icon\"></use>" +
+          "</svg>" +
+          "</button>" +
+          "<button class=\"foods-item__button-pm\" onclick=\"Basket.addGoods('" + View.categoryName + "-" + id + "-" + _each['good_id'] + "', '" + _each['name'] + "', '200 г.', '" + _each['price'] + " руб.', 'good-" + _each['good_id'] + "','" +  _each['path']+ "')\">" +
+          "<svg width=\"14px\" height=\"14px\">" +
+          "<use xlink:href=\"img/icons-pack.svg#svg-plus-icon\"></use>" +
+          "</svg>" +
+          "</button>" +
+          "</div>" +
+          "</div>" +
+          "</div>" +
+          "</div>";
+          goodsList.innerHTML += html;
+        });
+      }
     }, View.categoryName + ":" + id);
   },
   refreshStars: function(count) {
