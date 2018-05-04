@@ -18,7 +18,7 @@
   <div id="index-main-frame" class="frame frame--show">
   <div class="index-nav" id="index-nav">
   <div class="index-nav__menu">
-    <button class="index-nav__header">
+    <button class="index-nav__header" onclick="Booking.show()">
       <svg width="50px" height="50px" style="margin-top:-10px">
         <use xlink:href="img/icons-pack.svg#svg-food"></use>
       </svg>
@@ -426,6 +426,28 @@
         ЗАКАЗАТЬ
       </button>
     </div>
+  </form>
+</div>
+
+  <div class="index-booking" id="index-booking">
+  <div class="index-booking__title">ЗАБРОНИРОВАТЬ СТОЛИК</div>
+  <form action="" id="index-booking-form" onsubmit="return Booking.send(this)">
+    <button type="button" class="index-booking__close" onclick="Booking.close()">X</button>
+    <select name="rest" id="" class="index-booking__select" placeholder="Заведения">
+      <option value="Сплетни" class="index-booking__option">Сплетни</option>
+      <option value="Редиска" class="index-booking__option">Редиска</option>
+      <option value="Блэкберри" class="index-booking__option">Блэкберри</option>
+      <option value="Рэдберри" class="index-booking__option">Рэдберри</option>
+      <option value="Фастберри" class="index-booking__option">Фастберри</option>
+      <option value="Бродвей" class="index-booking__option">Бродвей</option>
+      <option value="Минутка на Шогенцукова" class="index-booking__option">Минутка на Шогенцукова</option>
+      <option value="Тирекс" class="index-booking__option">Тирекс</option>
+    </select>
+    <input type="text" name="count" class="index-booking__input" placeholder="Количество персон">
+    <input type="text" name="datetime" class="index-booking__input" placeholder="Дата и время посещения">
+    <input type="text" name="name" class="index-booking__input" placeholder="Имя">
+    <input type="text" name="phone" class="index-booking__input" placeholder="Телефон">
+    <button class="index-booking__submit">отправить</button>
   </form>
 </div>
 

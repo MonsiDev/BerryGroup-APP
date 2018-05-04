@@ -1628,7 +1628,7 @@ var Basket = {
         weight: weight,
         price: parseInt(price),
         count: 0,
-        path : path,
+        path: path
       };
     }
     Basket.goods[name]["count"]++;
@@ -1668,13 +1668,17 @@ var Basket = {
         if (_e.target[i].name == "delivery") {
           formSend[_e.target[i].name] = Basket.delivery;
         } else {
-          if(_e.target[i].name == "phone") {
-            if(!/((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}/.exec(_e.target[i].value)) {
-              _e.target[i].classList.add('error');
-              alert('Введите корректный телефон');
+          if (_e.target[i].name == "phone") {
+            if (
+              !/((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}/.exec(
+                _e.target[i].value
+              )
+            ) {
+              _e.target[i].classList.add("error");
+              Popup.show("Введите корректный телефон");
               return false;
             } else {
-              _e.target[i].classList.remove('error');
+              _e.target[i].classList.remove("error");
             }
           }
           formSend[_e.target[i].name] = _e.target[i].value;
@@ -1697,7 +1701,9 @@ var Basket = {
           $preloader.style.display = "";
           Frames.backFrame();
           Frames.backFrame();
-          alert("Заказ успешно оформлен, мы перезвоним вам в течение 5 минут для подтверждения заказа");
+          Popup.show(
+            "Заказ успешно оформлен, мы перезвоним вам в течение 5 минут для подтверждения заказа"
+          );
         });
       };
     }
@@ -1750,15 +1756,22 @@ var Basket = {
     var infoDelivery = document.querySelectorAll("#basket-info-delivery");
     totalPrice.forEach(function(_each) {
       var totalPrice = Basket.totalPrice;
-      if (Basket.delivery == true && Basket.totalPrice < 1000) {
-        totalPrice = Basket.totalPrice + 100;
+      if (Basket.delivery == true) {
+        document.querySelector('input[name="address"]').hidden = false;
+        document.querySelector('input[name="address"]').required = true;
+        if (Basket.totalPrice < 1000) {
+          totalPrice = Basket.totalPrice + 100;
+        }
+      } else {
+        document.querySelector('input[name="address"]').hidden = true;
+        document.querySelector('input[name="address"]').required = false;
       }
       _each.children[1].innerHTML = String(totalPrice) + " руб.";
     });
     infoDelivery.forEach(function(_each) {
       var msg = "самовывоз";
       if (Basket.delivery == true) {
-        msg = "курьером";
+        msg = "100 руб.";
         if (Basket.totalPrice > 1000) {
           msg = "бесплатно";
         }
@@ -1771,6 +1784,8 @@ var Basket = {
       Basket.goodsRefresh();
       Basket.basketRefresh();
       Frames.goFrame("index-basket-frame");
+    } else {
+      Popup.show("Ваша корзина пуста");
     }
   }
 };
@@ -1818,6 +1833,8 @@ var Frames = {
 
   window["appInit"] = function() {
     navInit("nav-button-show");
+    Popup.init();
+    Booking.init();
     View.init();
     Frames.init(document.getElementById("frames"));
   };
@@ -1894,6 +1911,62 @@ var Net = {
     }
   },
 };
+
+var Popup = {
+  init: function() {
+    Popup.element = document.createElement("DIV");
+    Popup.description = document.createElement("DIV");
+    Popup.button = document.createElement("BUTTON");
+
+    Popup.element.classList.add("index-popup");
+    Popup.description.classList.add("index-popup__description");
+    Popup.button.classList.add("index-popup__button");
+
+    Popup.button.innerHTML = 'ОК';
+
+    Popup.show.bind(Popup.element);
+    Popup.close.bind(Popup.element);
+
+    Popup.button.addEventListener("click", Popup.close);
+
+    Popup.element.appendChild(Popup.description);
+    Popup.element.appendChild(Popup.button);
+
+    document.body.appendChild(Popup.element);
+  },
+  show: function(desc) {
+    Popup.description.innerHTML = desc;
+    Popup.element.classList.add("index-popup--show");
+  },
+  close: function(_e) {
+    Popup.element.classList.remove("index-popup--show");
+  }
+};
+
+var Booking = {
+  init: function() {
+    Booking.element = document.getElementById('index-booking');
+  },
+  show: function() {
+    Booking.element.classList.add('index-booking--show');
+  },
+  close: function() {
+    Booking.element.classList.remove('index-booking--show');
+  },
+  send: function($this) {
+    var _e = event || window.event;
+    var json = {};
+
+    for(var i = 0; i < _e.target.length; i++) {
+      if(_e.target[i].name != "") {
+        json[_e.target[i].name] = _e.target[i].value;
+      }
+    }
+    WSocket.send('booking=' + JSON.stringify(json));
+    Booking.close();
+    return false;
+  }
+}
 
 var View = {
   idList: document.getElementById("index-category-list"),
@@ -2015,7 +2088,7 @@ var View = {
   }
 };
 
-var WSocket = new WebSocket("ws://82.146.54.90:2346");//82.146.54.90
+var WSocket = new WebSocket("ws://127.0.0.1:2346");//82.146.54.90
 
 WSocket.onopen = function() {};
 
