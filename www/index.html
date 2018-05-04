@@ -1,60 +1,466 @@
 <!DOCTYPE html>
-<!--
-    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
-
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
-    <!-- Good default declaration:
-    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-        * Enable inline JS: add 'unsafe-inline' to default-src
-        * Enable eval(): add 'unsafe-eval' to default-src
-    * Create your own at http://cspisawesome.com
-    -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
-
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <title>Hello World</title>
+  <meta charset="utf-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+  <!--meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" /-->
+  <link rel="stylesheet" type="text/css" href="build/css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="build/css/fonts.css" />
+  <link rel="stylesheet" type="text/css" href="build/css/jquery.mobile.css" />
+  <link rel="stylesheet" type="text/css" href="build/css/build.min.css" />
+  <title>Berry Group</title>
 </head>
-
 <body>
-    <div class="app">
-        <h1>PhoneGap</h1>
-        <div id="deviceready" class="blink">
-            <p class="event listening">Connecting to Device</p>
-            <p class="event received">Device is Ready</p>
-        </div>
-    </div>
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript">
-        app.initialize();
-    </script>
-</body>
 
+<div id="frames">
+  <div id="index-main-frame" class="frame frame--show">
+  <div class="index-nav" id="index-nav">
+  <div class="index-nav__menu">
+    <button class="index-nav__header" onclick="Booking.show()">
+      <svg width="50px" height="50px" style="margin-top:-10px">
+        <use xlink:href="img/icons-pack.svg#svg-food"></use>
+      </svg>
+      <div class="index-nav__header-info">
+        <div class="index-nav__header-info-title">Забронировать</div>
+        <div class="index-nav__header-info-description">столик</div>
+      </div>
+    </button>
+    <div class="index-nav__list">
+      <button class="index-nav__item" onclick="Basket.goBasket(this);navClose()">
+        <svg width="16px" height="15px">
+          <use xlink:href="img/icons-pack.svg#svg-item-cart-icon"></use>
+        </svg>
+        <span>Корзина</span>
+      </button>
+      <button class="index-nav__item" onclick="Frames.goFrame('index-main-frame', this, navClose());">
+        <svg width="17px" height="17px">
+          <use xlink:href="img/icons-pack.svg#svg-item-food-icon"></use>
+        </svg>
+        <span>Заведения</span>
+      </button>
+      <button class="index-nav__item" onclick="window.open('http://xn--80ajjbkbdnbpvp4e9c.xn--p1ai/card');navClose()">
+        <svg width="15px" height="11px">
+          <use xlink:href="img/icons-pack.svg#svg-item-card-icon"></use>
+        </svg>
+        <span>Накопительные карты</span>
+      </button>
+      <button class="index-nav__item index-nav__item--border-top" onclick="window.open('tel:89287207200');navClose()">
+        <svg width="15px" height="15px">
+          <use xlink:href="img/icons-pack.svg#svg-item-phone-icon"></use>
+        </svg>
+        <span>Позвонить нам</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+  <div class="index-header">
+  <button class="index-header__button" id="nav-button-show" data-nav="index-nav">
+    <svg class="svg-icon" width="18px" height="12px">
+      <use xlink:href="img/icons-pack.svg#svg-menu-icon"></use>
+    </svg>
+  </button>
+  <div class="index-header__logo">
+    <svg class="svg-icon">
+      <use xlink:href="img/icons-pack.svg#svg-berry-logo"></use>
+    </svg>
+  </div>
+  <button class="index-header__button" onclick="Basket.goBasket(this)">
+    <svg class="svg-icon" width="22px" height="21px">
+      <use xlink:href="img/icons-pack.svg#svg-cart-icon"></use>
+    </svg>
+  </button>
+</div>
+
+  <div class="restaurant">
+  <div class="restaurant-card" style="background-image: url('img/restaurant/spletni.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/spletni.png)', 'img/logo/spletni-logo.png', 'Кафе Сплетни', 'spletni', 'http://xn--80ajjbkbdnbpvp4e9c.xn--p1ai'))">
+  <div class="restaurant-card__logo">
+    <img src="img/logo/spletni-logo.png" class="restaurant-card__image">
+  </div>
+  <div class="restaurant-card__info">
+    <div class="restaurant-card__title">Кафе Сплетни</div>
+    <div class="resturant-card__description">Средний чек 1200 рублей</div>
+  </div>
+</div>
+
+  <div class="restaurant-card" style="background-image: url('img/restaurant/rediska.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/rediska.png)', 'img/logo/rediska-logo.png', 'Буфет Редиска', 'rediska', 'http://xn--80aakdqcldhs1ap7f5c.xn--p1ai'))">
+  <div class="restaurant-card__logo">
+    <img src="img/logo/rediska-logo.png" class="restaurant-card__image">
+  </div>
+  <div class="restaurant-card__info">
+    <div class="restaurant-card__title">Буфет Редиска</div>
+    <div class="resturant-card__description">Средний чек 500 рублей</div>
+  </div>
+</div>
+
+  <div class="restaurant-card" style="background-image: url('img/restaurant/blackberry.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/blackberry.png)', 'img/logo/blackberry-logo.png', 'BlackBerry', 'blackberry', 'http://xn--80abaqpbjfcfu8aa6h6cg.xn--p1ai'))">
+  <div class="restaurant-card__logo">
+    <img src="img/logo/blackberry-logo.png" class="restaurant-card__image">
+  </div>
+  <div class="restaurant-card__info">
+    <div class="restaurant-card__title">BlackBerry</div>
+    <div class="resturant-card__description">Средний чек 1200 рублей</div>
+  </div>
+</div>
+
+  <div class="restaurant-card" style="background-image: url('img/restaurant/redberry.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/redberry.png)', 'img/logo/redberry-logo.png', 'RedBerry', 'redberry', 'http://xn--80abidcsbqhs1aea6h6c.xn--p1ai'))">
+  <div class="restaurant-card__logo">
+    <img src="img/logo/redberry-logo.png" class="restaurant-card__image">
+  </div>
+  <div class="restaurant-card__info">
+    <div class="restaurant-card__title">RedBerry</div>
+    <div class="resturant-card__description">Средний чек 1200 рублей</div>
+  </div>
+</div>
+
+  <div class="restaurant-card" style="background-image: url('img/restaurant/Broadway.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/Broadway.png)', 'img/logo/Broadway-logo.png', 'BroadWay', 'Broadway', 'http://xn--80abdhgtfkhsgx3h3c.xn--p1ai'))">
+  <div class="restaurant-card__logo">
+    <img src="img/logo/Broadway-logo.png" class="restaurant-card__image">
+  </div>
+  <div class="restaurant-card__info">
+    <div class="restaurant-card__title">BroadWay</div>
+    <div class="resturant-card__description">Средний чек 900 рублей</div>
+  </div>
+</div>
+
+  <div class="restaurant-card" style="background-image: url('img/restaurant/fastberry.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/fastberry.png)', 'img/logo/fastberry-logo.png', 'Fast Berry', 'fastberry', 'http://xn--80aacqpbogq2aainz0d8d.xn--p1ai'))">
+  <div class="restaurant-card__logo">
+    <img src="img/logo/fastberry-logo.png" class="restaurant-card__image">
+  </div>
+  <div class="restaurant-card__info">
+    <div class="restaurant-card__title">Fast Berry</div>
+    <div class="resturant-card__description">Средний чек 1200 рублей</div>
+  </div>
+</div>
+
+  <div class="restaurant-card" style="background-image: url('img/restaurant/minutka.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/minutka.png)', 'img/logo/minutka-logo.png', 'Бистро Минутка', 'minutka', 'http://xn--80aawchdfdkc6cl2dvd.xn--p1ai'))">
+  <div class="restaurant-card__logo">
+    <img src="img/logo/minutka-logo.png" class="restaurant-card__image">
+  </div>
+  <div class="restaurant-card__info">
+    <div class="restaurant-card__title">Бистро Минутка</div>
+    <div class="resturant-card__description">Средний чек 400 рублей</div>
+  </div>
+</div>
+
+  <div class="restaurant-card" style="background-image: url('img/restaurant/tirex.png');" onclick="Frames.goFrame('index-category-frame', this, View.renderCategory('url(img/restaurant/tirex.png)', 'img/logo/tirex-logo.png', 'Кафе Тирекс', 'tirex', 'http://xn--80apbgcemwkg6d1ch.xn--p1ai'))">
+  <div class="restaurant-card__logo">
+    <img src="img/logo/tirex-logo.png" class="restaurant-card__image">
+  </div>
+  <div class="restaurant-card__info">
+    <div class="restaurant-card__title">Кафе Тирекс</div>
+    <div class="resturant-card__description">Средний чек 1200 рублей</div>
+  </div>
+</div>
+
+</div>
+
+</div>
+
+  <div id="index-category-frame" class="frame">
+  <div class="category-info-w" id="category-info-w">
+  <div class="foods-header">
+    <button class="foods-header__button" onclick="eventInfo()">
+      <svg width="12px" height="12px">
+        <use xlink:href="img/icons-pack.svg#svg-close"></use>
+      </svg>
+    </button>
+    <div class="foods-header__title" id="basket-header-title">Информация</div>
+  </div>
+  <div class="category-info-w__item">
+    <div class="category-info-w__title">Телефон</div>
+    <div class="category-info-w__desc" id="category-info-w-phone">+7 (928) 720-720-0</div>
+  </div>
+  <div class="category-info-w__item">
+    <div class="category-info-w__title">Время</div>
+    <div class="category-info-w__desc" id="category-info-w-time">11.00 - 00.00</div>
+  </div>
+  <div class="category-info-w__item">
+    <div class="category-info-w__title">Адрес</div>
+    <div class="category-info-w__desc"  id="category-info-w-address">г. Нальчик, ул. Кешокова, 77</div>
+  </div>
+</div>
+
+  <div class="category-head" id="index-category-head">
+    <div class="category-header">
+      <button class="category-header__button" onclick="Frames.backFrame(event)">
+        <svg width="14px" height="14px" stroke="#fff">
+          <use xlink:href="img/icons-pack.svg#svg-arrow-left"></use>
+        </svg>
+      </button>
+      <button class="category-header__button" onclick="eventInfo()">
+        <svg width="20px" height="20px">
+          <use xlink:href="img/icons-pack.svg#svg-info"></use>
+        </svg>
+      </button>
+    </div>
+    <div class="category-info">
+      <div class="category-info__logo">
+        <img src="" class="category-info__image" id="index-category-logo">
+      </div>
+      <div class="category-info__right">
+        <div class="category-info__title" id="index-category-title"></div>
+        <div class="category-info__stars" id="index-category-stars">
+          <svg width="12px" height="12px" data-star="1">
+            <use xlink:href="img/icons-pack.svg#svg-star-icon"></use>
+          </svg>
+          <svg width="12px" height="12px" data-star="2">
+            <use xlink:href="img/icons-pack.svg#svg-star-icon"></use>
+          </svg>
+          <svg width="12px" height="12px" data-star="3">
+            <use xlink:href="img/icons-pack.svg#svg-star-icon"></use>
+          </svg>
+          <svg width="12px" height="12px" data-star="4">
+            <use xlink:href="img/icons-pack.svg#svg-star-icon"></use>
+          </svg>
+          <svg width="12px" height="12px" data-star="5">
+            <use xlink:href="img/icons-pack.svg#svg-star-icon"></use>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="index-category-list">
+
+  </div>
+</div>
+
+  <div id="index-foods-frame" class="frame">
+  <div class="foods-header">
+  <button class="foods-header__button" onclick="Frames.backFrame()">
+    <svg width="14px" height="14px" stroke="#454442">
+      <use xlink:href="img/icons-pack.svg#svg-arrow-left"></use>
+    </svg>
+  </button>
+  <div class="foods-header__title" id="foods-header-title"></div>
+</div>
+
+  <div id="index-foods-list">
+    <div class="foods-item" id="good-1" style="background-image: url('http://dietdo.ru/wp-content/uploads/2017/02/salat-avokado-krevetki-2.jpg');">
+      <div class="foods-item__info">
+        <div class="foods-item__title">Авокадо с креветками</div>
+        <div class="foods-item__description">Авокадо, тигровые креветки, лимон, помидоры, масло оливковое</div>
+      </div>
+      <div class="foods-item__panel">
+        <div class="foods-item__price">420 руб.</div>
+        <div class="foods-item__weight">200 г.</div>
+        <div class="foods-item__button">
+          <button class="foods-item__button-delivery" id="good-delivery-button" onclick="Basket.addGoods('peska', 'Авокадо', '200 г.', '420', 'good-1')">
+            <svg width="15px" height="15px" stroke="#fff">
+              <use xlink:href="img/icons-pack.svg#svg-item-cart-icon"></use>
+            </svg>
+            <span>Заказать</span>
+          </button>
+          <div class="foods-item__button-calc foods-item__button-calc--hidden" id="good-delivery-calc">
+            <div class="foods-item__button-ct" id="good-calc-count">2 шт</div>
+            <button class="foods-item__button-pm" onclick="Basket.subGoods('peska', 'good-1')">
+              <svg width="14px" height="14px">
+                <use xlink:href="img/icons-pack.svg#svg-minus-icon"></use>
+              </svg>
+            </button>
+            <button class="foods-item__button-pm" onclick="Basket.addGoods('peska', 'Авокадо', '200 г.', '420 руб.', 'good-1')">
+              <svg width="14px" height="14px">
+                <use xlink:href="img/icons-pack.svg#svg-plus-icon"></use>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div id="index-basket-frame" class="frame">
+  <div class="foods-header">
+  <button class="foods-header__button" onclick="Frames.backFrame()">
+    <svg width="14px" height="14px" stroke="#454442">
+      <use xlink:href="img/icons-pack.svg#svg-arrow-left"></use>
+    </svg>
+  </button>
+  <div class="foods-header__title" id="basket-header-title">Корзина</div>
+</div>
+
+  <div class="basket-logo">
+    <svg class="svg-icon">
+      <use xlink:href="img/icons-pack.svg#svg-berry-logo"></use>
+    </svg>
+  </div>
+  <div class="basket-goods" id="basket-goods">
+    <div class="basket-good">
+      <div class="basket-good__img" style="background-image: url('http://edinstvennaya.ua/pictures/article/16157_max.jpg');"></div>
+      <div class="basket-good__info">
+        <div class="basket-good__title">Авокадо</div>
+        <div class="basket-good__weight">200 г</div>
+        <div class="basket-good__count">
+          <span data-text="Количество"></span>
+          <span data-text="2 шт."></span>
+        </div>
+        <div class="basket-good__price">
+          <span data-text="Цена"></span>
+          <span data-text="840 руб."></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="basket-total">
+    <div class="basket-total__title" id="basket-total-price">
+      <span>Сумма</span>
+      <span>1680</span>
+    </div>
+    <div class="basket-total__title" id="basket-info-delivery">
+      <span>Доставка</span>
+      <span>бесплатно</span>
+    </div>
+  </div>
+  <div class="basket-delivery">
+    <div class="basket-delivery__total" id="basket-total-price">
+      <span>Итого:</span>
+      <span>1680 руб.</span>
+    </div>
+    <button class="basket-delivery__button" onclick="Frames.goFrame('index-delivery-frame', this)">
+      ОФОРМИТЬ ЗАКАЗ
+    </button>
+  </div>
+</div>
+
+  <div id="index-delivery-frame" class="frame">
+  <div class="foods-header">
+  <button class="foods-header__button" onclick="Frames.backFrame()">
+    <svg width="14px" height="14px" stroke="#454442">
+      <use xlink:href="img/icons-pack.svg#svg-arrow-left"></use>
+    </svg>
+  </button>
+  <div class="foods-header__title">Оформление заказа</div>
+</div>
+
+  <div class="preloader" id="delivery-preloader">
+  <svg viewBox="0 0 120 120" class="svg-preloader">
+      <symbol id="s-circle">
+        <circle r="10" cx="10" cy="10"></circle>
+      </symbol>
+     <rect class="r-bounds" width="100%" height="100%"/>
+      <g id="circle" class="g-circles">
+        <g class="g-circle">
+          <use xlink:href="#s-circle" class="u-circle"/>
+        </g>
+        <g class="g-circle">
+          <use xlink:href="#s-circle" class="u-circle"/>
+        </g>
+        <g class="g-circle">
+          <use xlink:href="#s-circle" class="u-circle"/>
+        </g>
+        <g class="g-circle">
+          <use xlink:href="#s-circle" class="u-circle"/>
+        </g>
+        <g class="g-circle">
+          <use xlink:href="#s-circle" class="u-circle"/>
+        </g>
+        <g class="g-circle">
+          <use xlink:href="#s-circle" class="u-circle"/>
+        </g>
+        <g class="g-circle">
+          <use xlink:href="#s-circle" class="u-circle"/>
+        </g>
+        <g class="g-circle">
+          <use xlink:href="#s-circle" class="u-circle"/>
+        </g>
+        <g class="g-circle">
+          <use xlink:href="#s-circle" class="u-circle"/>
+        </g>
+        <g class="g-circle">
+          <use xlink:href="#s-circle" class="u-circle"/>
+        </g>
+        <g class="g-circle">
+          <use xlink:href="#s-circle" class="u-circle"/>
+        </g>
+        <g class="g-circle">
+          <use xlink:href="#s-circle" class="u-circle"/>
+        </g>
+      </g>
+    </svg>
+</div>
+
+  <form onsubmit="return Basket.sendDelivery(this)">
+    <div class="basket-delivery-contact">
+      <div class="basket-delivery-contact__title">Как с вами связаться?</div>
+        <input type="text" name="phone" class="basket-delivery-contact__input" placeholder="Телефон" pattern="((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}" required>
+        <input type="text" name="name" class="basket-delivery-contact__input" placeholder="Имя *" required>
+    </div>
+    <div class="basket-delivery-option">
+      <div class="basket-delivery-option__title">Доставка</div>
+      <div class="basket-delivery-option__description">При стоимости заказа от 1000 рублей - доставка курьером бесплатно.</div>
+      <div class="basket-delivery-radio">
+        <label>
+          <input type="radio" name="delivery"  onchange="Basket.delivery=true;Basket.basketRefresh()" checked>
+          <span class="basket-delivery-radio__box"></span>
+          <span class="basket-delivery-radio__title">Доставка курьером (100 руб)</span>
+        </label>
+      </div>
+      <div class="basket-delivery-radio">
+        <label>
+          <input type="radio" name="delivery" onchange="Basket.delivery=false;Basket.basketRefresh()">
+          <span class="basket-delivery-radio__box"></span>
+          <span class="basket-delivery-radio__title">Самовывоз (Бесплатно)</span>
+        </label>
+      </div>
+      <input type="text" name="address" class="basket-delivery-option__address" placeholder="Адрес доставки *" required>
+    </div>
+    <div class="basket-total">
+      <div class="basket-total__title" id="basket-total-price">
+        <span>Сумма</span>
+        <span>1680</span>
+      </div>
+      <div class="basket-total__title" id="basket-info-delivery">
+        <span>Доставка</span>
+        <span>бесплатно</span>
+      </div>
+    </div>
+    <div class="basket-delivery">
+      <div class="basket-delivery__total" id="basket-total-price">
+        <span>Итого:</span>
+        <span>1680 руб.</span>
+      </div>
+      <button class="basket-delivery__button">
+        ЗАКАЗАТЬ
+      </button>
+    </div>
+  </form>
+</div>
+
+  <div class="index-booking" id="index-booking">
+  <div class="index-booking__title">ЗАБРОНИРОВАТЬ СТОЛИК</div>
+  <form action="" id="index-booking-form" onsubmit="return Booking.send(this)">
+    <button type="button" class="index-booking__close" onclick="Booking.close()">X</button>
+    <select name="rest" id="" class="index-booking__select" placeholder="Заведения">
+      <option value="Сплетни" class="index-booking__option">Сплетни</option>
+      <option value="Редиска" class="index-booking__option">Редиска</option>
+      <option value="Блэкберри" class="index-booking__option">Блэкберри</option>
+      <option value="Рэдберри" class="index-booking__option">Рэдберри</option>
+      <option value="Фастберри" class="index-booking__option">Фастберри</option>
+      <option value="Бродвей" class="index-booking__option">Бродвей</option>
+      <option value="Минутка на Шогенцукова" class="index-booking__option">Минутка на Шогенцукова</option>
+      <option value="Тирекс" class="index-booking__option">Тирекс</option>
+    </select>
+    <input type="text" name="count" class="index-booking__input" placeholder="Количество персон">
+    <input type="text" name="datetime" class="index-booking__input" placeholder="Дата и время посещения">
+    <input type="text" name="name" class="index-booking__input" placeholder="Имя">
+    <input type="text" name="phone" class="index-booking__input" placeholder="Телефон">
+    <button class="index-booking__submit">отправить</button>
+  </form>
+</div>
+
+</div>
+
+  </body>
 </html>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="build/js/jquery.min.js"></script>
+<script type="text/javascript" src="build/js/index.js"></script>
+<script type="text/javascript" src="build/js/build.js"></script>
+<script type="text/javascript">
+    app.initialize();
+</script>
+
+
