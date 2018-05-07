@@ -1760,7 +1760,8 @@ var Basket = {
         document.querySelector('input[name="address"]').hidden = false;
         document.querySelector('input[name="address"]').required = true;
         if (Basket.totalPrice < 1000) {
-          totalPrice = Basket.totalPrice + 100;
+          totalPrice =
+            Basket.totalPrice + parseInt(_each.getAttribute("data-delivery-price") || 0);
         }
       } else {
         document.querySelector('input[name="address"]').hidden = true;
