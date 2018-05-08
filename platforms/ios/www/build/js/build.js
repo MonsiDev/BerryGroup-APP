@@ -1761,7 +1761,7 @@ var Basket = {
         document.querySelector('input[name="address"]').required = true;
         if (Basket.totalPrice < 1000) {
           totalPrice =
-            Basket.totalPrice + 100;
+            Basket.totalPrice + parseInt(_each.getAttribute("data-delivery-price"));
         }
       } else {
         document.querySelector('input[name="address"]').hidden = true;
