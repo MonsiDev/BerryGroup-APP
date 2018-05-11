@@ -1752,9 +1752,9 @@ var Basket = {
     }
   },
   basketRefresh: function() {
-    var totalPrice = document.querySelectorAll("#basket-total-price");
+    var totalPrice_ = document.querySelectorAll("#basket-total-price");
     var infoDelivery = document.querySelectorAll("#basket-info-delivery");
-    totalPrice.forEach(function(_each) {
+    totalPrice_.forEach(function(_each) {
       var totalPrice = Basket.totalPrice;
       if (Basket.delivery == true) {
         document.querySelector('input[name="address"]').hidden = false;
