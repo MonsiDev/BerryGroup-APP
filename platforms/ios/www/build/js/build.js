@@ -2155,7 +2155,8 @@ var View = {
   }
 };
 
-var WSocket = new WebSocket("ws://127.0.0.1:2346");//82.146.54.90
+var IPURL = "ws://127.0.0.1:2346";//82.146.54.90
+var WSocket = new WebSocket(IPURL);
 
 WSocket.onopen = function() {};
 
@@ -2166,6 +2167,9 @@ WSocket.onclose = function(event) {
     alert("Обрыв соединения"); // например, "убит" процесс сервера
   }
   alert("Код: " + event.code + " причина: " + event.reason);
+  if(!WSocket || WSocket.readyState == 3) {
+    var WSocket = new WebSocket(IPURL);
+  }
 };
 
 WSocket.onerror = function(error) {
